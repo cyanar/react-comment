@@ -1,24 +1,28 @@
 import React from 'react';
 import {Comment} from './comment';
 import './index.scss';
+import {Modal} from './Modal';
 class PictureList extends React.Component{
 	constructor(props){
 		super(props);
 		this.state={
-			showModal: false
+			showModal: false,
+			key: 0
 		}
 	}
-	showModal() {
+	showModal(id) {
 		this.setState({
-			showModal: true
+		  key: id
 		})
 	}
+
 	render(){
 
-		var commentNodes = this.props.data.map(comment => {
+		var commentNodes = this.props.data.map((comment, index) => {
 			return (
-					<div key={comment.id}>
-						<img src={comment.src} onClick={this.showModal.bind(this)}/>
+					<div key={comment.id} className='box'>
+						<img src={comment.src} onClick={this.showModal.bind(this,comment.id)}/>
+						<Modal comment={comment} showModal={this.state.key == index + 1}/>
 					</div>
 				);
 		});

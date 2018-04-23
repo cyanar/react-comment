@@ -4,7 +4,8 @@
   "description": "跟着官网的小demo",
   "main": "index.js",
   "scripts": {
-    "start": "webpack -d"
+    "start": "webpack -d",
+    "server": "node ./server/server"
   },
   "keywords": [
     "react",

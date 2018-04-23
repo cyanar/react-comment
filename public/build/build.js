@@ -65,7 +65,7 @@
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "7dac3835991795bb0eca"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "5638e47a359ad5fb25ec"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -608,7 +608,7 @@
 	
 	var _comment_box = __webpack_require__(/*! ./comment_box */ 185);
 	
-	var _comment = __webpack_require__(/*! ../scss/comment */ 194);
+	var _comment = __webpack_require__(/*! ../scss/comment */ 195);
 	
 	var _comment2 = _interopRequireDefault(_comment);
 	
@@ -22927,7 +22927,7 @@
 	
 	var _PictureList = __webpack_require__(/*! ./PictureList */ 187);
 	
-	var _comment_form = __webpack_require__(/*! ./comment_form */ 193);
+	var _comment_form = __webpack_require__(/*! ./comment_form */ 194);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -24627,6 +24627,8 @@
 	
 	__webpack_require__(/*! ./index.scss */ 189);
 	
+	var _Modal = __webpack_require__(/*! ./Modal */ 193);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -24644,16 +24646,17 @@
 			var _this = _possibleConstructorReturn(this, (PictureList.__proto__ || Object.getPrototypeOf(PictureList)).call(this, props));
 	
 			_this.state = {
-				showModal: false
+				showModal: false,
+				key: 0
 			};
 			return _this;
 		}
 	
 		_createClass(PictureList, [{
 			key: 'showModal',
-			value: function showModal() {
+			value: function showModal(id) {
 				this.setState({
-					showModal: true
+					key: id
 				});
 			}
 		}, {
@@ -24661,11 +24664,12 @@
 			value: function render() {
 				var _this2 = this;
 	
-				var commentNodes = this.props.data.map(function (comment) {
+				var commentNodes = this.props.data.map(function (comment, index) {
 					return _react2.default.createElement(
 						'div',
-						{ key: comment.id },
-						_react2.default.createElement('img', { src: comment.src, onClick: _this2.showModal.bind(_this2) })
+						{ key: comment.id, className: 'box' },
+						_react2.default.createElement('img', { src: comment.src, onClick: _this2.showModal.bind(_this2, comment.id) }),
+						_react2.default.createElement(_Modal.Modal, { comment: comment, showModal: _this2.state.key == index + 1 })
 					);
 				});
 	
@@ -24785,7 +24789,7 @@
 	
 	
 	// module
-	exports.push([module.id, "img {\n  width: 30%; }\n\n.modal {\n  width: 200px;\n  height: 100px;\n  position: absolute;\n  left: 50%;\n  height: 50%;\n  transform: translate(-50%, -50%); }\n", ""]);
+	exports.push([module.id, "img {\n  width: 50%;\n  margin-left: 10px;\n  float: left;\n  cursor: pointer; }\n\n.modal {\n  width: 200px;\n  height: 100px;\n  position: absolute;\n  left: 50%;\n  top: 50%;\n  z-index: 10;\n  border: 1px solid #ccc;\n  background: #fff;\n  transform: translate(-50%, -50%); }\n\n.box {\n  position: relative; }\n", ""]);
 	
 	// exports
 
@@ -25105,6 +25109,88 @@
 
 /***/ }),
 /* 193 */
+/*!****************************!*\
+  !*** ./public/js/Modal.js ***!
+  \****************************/
+/***/ (function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.Modal = undefined;
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(/*! react */ 2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _comment = __webpack_require__(/*! ./comment */ 188);
+	
+	__webpack_require__(/*! ./index.scss */ 189);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var Modal = function (_React$Component) {
+	  _inherits(Modal, _React$Component);
+	
+	  function Modal(props) {
+	    _classCallCheck(this, Modal);
+	
+	    var _this = _possibleConstructorReturn(this, (Modal.__proto__ || Object.getPrototypeOf(Modal)).call(this, props));
+	
+	    _this.state = {
+	      showModal: props.showModal
+	    };
+	    return _this;
+	  }
+	
+	  _createClass(Modal, [{
+	    key: 'render',
+	    value: function render() {
+	      var _props = this.props,
+	          comment = _props.comment,
+	          showModal = _props.showModal;
+	
+	
+	      return _react2.default.createElement(
+	        'div',
+	        null,
+	        showModal ? _react2.default.createElement(
+	          'div',
+	          { className: 'modal' },
+	          _react2.default.createElement(
+	            'h2',
+	            null,
+	            '\u56FE\u7247\u8BF4\u660E\uFF1A'
+	          ),
+	          _react2.default.createElement(
+	            'span',
+	            null,
+	            comment.title,
+	            '--',
+	            comment.description
+	          )
+	        ) : null
+	      );
+	    }
+	  }]);
+	
+	  return Modal;
+	}(_react2.default.Component);
+	
+	exports.Modal = Modal;
+
+/***/ }),
+/* 194 */
 /*!***********************************!*\
   !*** ./public/js/comment_form.js ***!
   \***********************************/
@@ -25205,7 +25291,7 @@
 	exports.CommentForm = CommentForm;
 
 /***/ }),
-/* 194 */
+/* 195 */
 /*!**********************************!*\
   !*** ./public/scss/comment.scss ***!
   \**********************************/
@@ -25214,7 +25300,7 @@
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 	
 	// load the styles
-	var content = __webpack_require__(/*! !../../~/css-loader!../../~/autoprefixer-loader!../../~/sass-loader!./comment.scss */ 195);
+	var content = __webpack_require__(/*! !../../~/css-loader!../../~/autoprefixer-loader!../../~/sass-loader!./comment.scss */ 196);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(/*! ../../~/style-loader/addStyles.js */ 192)(content, {});
@@ -25223,8 +25309,8 @@
 	if(true) {
 		// When the styles change, update the <style> tags
 		if(!content.locals) {
-			module.hot.accept(/*! !../../~/css-loader!../../~/autoprefixer-loader!../../~/sass-loader!./comment.scss */ 195, function() {
-				var newContent = __webpack_require__(/*! !../../~/css-loader!../../~/autoprefixer-loader!../../~/sass-loader!./comment.scss */ 195);
+			module.hot.accept(/*! !../../~/css-loader!../../~/autoprefixer-loader!../../~/sass-loader!./comment.scss */ 196, function() {
+				var newContent = __webpack_require__(/*! !../../~/css-loader!../../~/autoprefixer-loader!../../~/sass-loader!./comment.scss */ 196);
 				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 				update(newContent);
 			});
@@ -25234,7 +25320,7 @@
 	}
 
 /***/ }),
-/* 195 */
+/* 196 */
 /*!*****************************************************************************************!*\
   !*** ./~/css-loader!./~/autoprefixer-loader!./~/sass-loader!./public/scss/comment.scss ***!
   \*****************************************************************************************/
@@ -25245,7 +25331,7 @@
 	
 	
 	// module
-	exports.push([module.id, "html, body {\n  margin: 0;\n  -webkit-tap-highlight-color: transparent;\n  font-family: \"Microsoft YaHei\";\n  -webkit-font-smoothing: antialiased;\n  box-sizing: border-box; }\n\nh1 {\n  color: #03A9F4; }\n\n.comment {\n  padding: 10px;\n  border-bottom: 1px solid #999; }\n  .comment h2 {\n    margin: 8px 0; }\n\n.commentForm {\n  margin: 10px; }\n  .commentForm input[type=text] {\n    margin-right: 4px;\n    font-size: 20px; }\n  .commentForm input[type=submit] {\n    font-size: 20px;\n    background: #03A9F4;\n    border: none;\n    padding: 4px 6px;\n    border-radius: 4px;\n    color: #fff; }\n", ""]);
+	exports.push([module.id, "html, body {\n  margin: 0;\n  -webkit-tap-highlight-color: transparent;\n  font-family: \"Microsoft YaHei\";\n  -webkit-font-smoothing: antialiased;\n  box-sizing: border-box; }\n\nh1 {\n  color: #03A9F4; }\n\n.comment {\n  padding: 10px;\n  border-bottom: 1px solid #999; }\n  .comment h2 {\n    margin: 8px 0; }\n\n.commentForm {\n  margin: 10px; }\n  .commentForm input[type=text] {\n    margin-right: 4px;\n    font-size: 20px; }\n  .commentForm input[type=submit] {\n    font-size: 20px;\n    background: #03A9F4;\n    border: none;\n    padding: 4px 6px;\n    border-radius: 4px;\n    color: #fff; }\n\nimg {\n  width: 200px; }\n", ""]);
 	
 	// exports
 

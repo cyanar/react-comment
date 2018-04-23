@@ -3,22 +3,32 @@ import {Comment} from './comment';
 import './index.scss';
 class Modal extends React.Component{
 	constructor(props){
-		super(props);
+    super(props);
+    this.state={
+      showModal: props.showModal
+    }
 	}
 	render(){
     const {
-      data,
+      comment,
       showModal
     } = this.props;
-        {
-          showModal
-           ?
-          <div className='modal'>
-            {data.title}--{data.description}
-          </div>
-          :
-          null
-        }
+
+      return (
+        <div>
+          {
+            showModal
+            ?
+            <div className='modal'>
+            <h2>图片说明：</h2>
+            <span>{comment.title}--{comment.description}</span>
+            </div>
+            :
+            null
+          }
+      </div>
+      )
+
 	}
 }
 

@@ -1,11 +1,20 @@
 img {
-  width: 30%;
+  width: 50%;
+  margin-left: 10px;
+  float: left;
+  cursor: pointer;
 }
 .modal {
   width: 200px;
   height: 100px;
   position: absolute;
   left: 50%;
-  height: 50%;
+  top: 50%;
+  z-index: 10;
+  border: 1px solid #ccc;
+  background: #fff;
   transform: translate(-50%, -50%);
+}
+.box {
+  position: relative;
 }
