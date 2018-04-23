@@ -65,7 +65,7 @@
 /******/ 	}
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "59d4629d01583b9cd8fa"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "7dac3835991795bb0eca"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -22925,7 +22925,7 @@
 	
 	var _webpackZepto2 = _interopRequireDefault(_webpackZepto);
 	
-	var _picture_list = __webpack_require__(/*! ./picture_list */ 187);
+	var _PictureList = __webpack_require__(/*! ./PictureList */ 187);
 	
 	var _comment_form = __webpack_require__(/*! ./comment_form */ 193);
 	
@@ -23011,8 +23011,7 @@
 	          null,
 	          'Pictures:'
 	        ),
-	        _react2.default.createElement(_picture_list.PictureList, { data: this.state.data }),
-	        _react2.default.createElement(_comment_form.CommentForm, { onCommentSubmit: this.handleCommentSubmit })
+	        _react2.default.createElement(_PictureList.PictureList, { data: this.state.data })
 	      );
 	    }
 	  }]);
@@ -24606,9 +24605,9 @@
 
 /***/ }),
 /* 187 */
-/*!***********************************!*\
-  !*** ./public/js/picture_list.js ***!
-  \***********************************/
+/*!**********************************!*\
+  !*** ./public/js/PictureList.js ***!
+  \**********************************/
 /***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -24639,13 +24638,25 @@
 	var PictureList = function (_React$Component) {
 		_inherits(PictureList, _React$Component);
 	
-		function PictureList() {
+		function PictureList(props) {
 			_classCallCheck(this, PictureList);
 	
-			return _possibleConstructorReturn(this, (PictureList.__proto__ || Object.getPrototypeOf(PictureList)).apply(this, arguments));
+			var _this = _possibleConstructorReturn(this, (PictureList.__proto__ || Object.getPrototypeOf(PictureList)).call(this, props));
+	
+			_this.state = {
+				showModal: false
+			};
+			return _this;
 		}
 	
 		_createClass(PictureList, [{
+			key: 'showModal',
+			value: function showModal() {
+				this.setState({
+					showModal: true
+				});
+			}
+		}, {
 			key: 'render',
 			value: function render() {
 				var _this2 = this;

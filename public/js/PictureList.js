@@ -2,6 +2,17 @@ import React from 'react';
 import {Comment} from './comment';
 import './index.scss';
 class PictureList extends React.Component{
+	constructor(props){
+		super(props);
+		this.state={
+			showModal: false
+		}
+	}
+	showModal() {
+		this.setState({
+			showModal: true
+		})
+	}
 	render(){
 
 		var commentNodes = this.props.data.map(comment => {

@@ -1,6 +1,6 @@
 import React from 'react';
 import $ from 'webpack-zepto';
-import {PictureList} from './picture_list';
+import {PictureList} from './PictureList';
 import {CommentForm} from './comment_form';
 
 class CommentBox extends React.Component{
@@ -62,7 +62,6 @@ class CommentBox extends React.Component{
   			<div className="commentBox">
       		  <h1>Pictures:</h1>
       		 <PictureList data={this.state.data} />
-      		  <CommentForm onCommentSubmit={this.handleCommentSubmit} />
       		</div>
   		);
   	}
